@@ -28,7 +28,13 @@ $arguments = @(
 & $compiler "@$response"
 if ($LASTEXITCODE -ne 0) { throw "Build failed with exit code $LASTEXITCODE." }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination (Join-Path $bin 'README.md') -Force
-$archive = Join-Path $dist 'XboxActiveDownloads-v1.0.0.zip'
-Compress-Archive -LiteralPath @((Join-Path $bin 'XboxActiveDownloads.exe'), (Join-Path $bin 'README.md')) -DestinationPath $archive -Force
+foreach ($name in @('JRPC.dll', 'xdevkit.dll')) {
+    Copy-Item -LiteralPath (Join-Path $DependenciesDirectory $name) -Destination (Join-Path $bin $name) -Force
+}
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'THIRD-PARTY-NOTICES.md') -Destination $bin -Force
+$archive = Join-Path $dist 'XboxActiveDownloads-v1.0.1.zip'
+$releaseFiles = @('XboxActiveDownloads.exe', 'JRPC.dll', 'xdevkit.dll', 'README.md', 'THIRD-PARTY-NOTICES.md') |
+    ForEach-Object { Join-Path $bin $_ }
+Compress-Archive -LiteralPath $releaseFiles -DestinationPath $archive -Force
 Write-Host "Built: $(Join-Path $bin 'XboxActiveDownloads.exe')"
 Write-Host "Release: $archive"
