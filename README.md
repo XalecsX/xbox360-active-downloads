@@ -5,7 +5,7 @@ A small Windows app with one button to open **Active Downloads** on a network-co
 ## Run
 
 1. Download and extract the app ZIP from Releases.
-2. Put your own `JRPC.dll` and `xdevkit.dll` beside `XboxActiveDownloads.exe`.
+2. Keep the included `JRPC.dll` and `xdevkit.dll` beside `XboxActiveDownloads.exe`.
 3. Turn on the Xbox and make sure it is reachable from your PC.
 4. Open the app, enter the Xbox IP address or console name, and click **Open Active Downloads**.
 
@@ -15,13 +15,13 @@ The app remembers the address after a successful connection in `xbox-address.txt
 
 - Windows with .NET Framework 4.5 or later.
 - Xbox 360 SDK / Xbox 360 Neighbourhood installed and configured on the PC.
-- Your own compatible `JRPC.dll` and `xdevkit.dll`.
+- The bundled `JRPC.dll` and `xdevkit.dll`, kept beside the executable.
 - An Xbox 360 with the JRPC remote-call plugin already running and a working debug connection.
 - PC and console on a reachable local network.
 
 This is intended for consoles already configured for Xbox 360 Neighbourhood and JRPC. It does not configure or modify the console.
 
-**External DLLs, the Xbox SDK, console plugins, and game files are not included.** Obtain dependencies separately under their respective terms.
+**Release v1.0.1 includes both dependency DLLs.** The Xbox SDK installation, console plugins, and game files are not included. The bundled components belong to their respective owners; see [third-party notices](THIRD-PARTY-NOTICES.md).
 
 ## Build
 
@@ -37,7 +37,7 @@ To use a different dependency folder:
 .\build.ps1 -DependenciesDirectory 'C:\path\to\your\dependencies'
 ```
 
-The build uses the .NET Framework C# compiler included with Windows. It produces `bin\XboxActiveDownloads.exe` and `dist\XboxActiveDownloads-v1.0.0.zip`. The ZIP contains the app and usage instructions; supply the external DLLs separately.
+The build uses the .NET Framework C# compiler included with Windows. It produces `bin\XboxActiveDownloads.exe` and `dist\XboxActiveDownloads-v1.0.1.zip`. The ZIP contains the app, both dependency DLLs, usage instructions, and third-party notices. Supply your own local DLLs when rebuilding from source; binary dependencies are not tracked in this source repository.
 
 The app also accepts `--open <console-address>` to open the menu without displaying its window. It returns exit code 0 on success and 1 on failure.
 
