@@ -1,0 +1,14 @@
+# External dependencies (supply your own copies)
+lib/*.dll
+*.dll
+
+# Local configuration and output
+xbox-address.txt
+bin/
+dist/
+*.exe
+*.pdb
+*.log
+*.bmp
+*.png
+.vs/
